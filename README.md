@@ -8,3 +8,9 @@ git checkout -b yourName
 
 # upload your branch at first time
 git push --set-upstream origin yourname
+
+#merge your branch into master
+1. go to master branch
+git checkout master
+2. merge
+git merge yourname
