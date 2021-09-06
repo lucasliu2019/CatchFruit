@@ -12,6 +12,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Utilities.setToFullScreen(getWindow());
         setContentView(R.layout.activity_main);
     }
 
@@ -22,5 +23,14 @@ public class MainActivity extends AppCompatActivity {
 
     public void aboutGame(View view){
 
+    }
+
+    // set window to full screen
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        if (hasFocus) {
+            Utilities.setToFullScreen(getWindow());;
+        }
     }
 }
