@@ -1,0 +1,11 @@
+<resources>
+    <style name="style_button" parent="Theme.AppCompat.Light">
+        <item name="android:textSize">20dp</item>
+        <item name="android:layout_width">200dp</item>
+        <item name="android:layout_height">80dp</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:fontFamily">@font/the_bomb</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_margin">10dp</item>
+    </style>
+</resources>
