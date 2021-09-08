@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
         if (hasFocus) {
-            Utilities.setToFullScreen(getWindow());;
+            Utilities.setToFullScreen(getWindow());
         }
     }
 }
