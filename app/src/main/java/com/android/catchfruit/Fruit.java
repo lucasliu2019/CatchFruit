@@ -38,6 +38,9 @@ public class Fruit extends AppCompatImageView {
 
     public Fruit(Context context, int imgRid, int point){
         super(context);
+
+        setImageResource(R.drawable.pin);
+        
         this.gameActivity=(GameActivity) context;
         this.imgRid=imgRid;
         this.point=point;
