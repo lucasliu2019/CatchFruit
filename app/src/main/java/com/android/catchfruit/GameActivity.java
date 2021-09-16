@@ -41,6 +41,8 @@ public class GameActivity extends AppCompatActivity {
     private int fruitCaught = 0;
 
     private ArrayList<ImageView> pinImages = new ArrayList<>();
+    private Fruit ftemp=new Fruit(GameActivity.this, R.drawable.fruit_apple, 1,100);
+    private int deltaX, deltaY;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,14 +90,18 @@ public class GameActivity extends AppCompatActivity {
 
     //use to move the basket.... Not done yet
     private View.OnTouchListener onTouchListener() {
-        View.OnTouchListener onTouchListener = new View.OnTouchListener() {
+        return new View.OnTouchListener() {
             @SuppressLint("ClickableViewAccessibility")
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                return false;
+                final int x = (int) event.getRawX();
+                final int y = (int)event.getRawY();
+                if (x== ftemp.getX() && y== ftemp.getY())
+                    ftemp.setCaught();
+                //move left and right
+                return true;
             }
         };
-        return onTouchListener;
     }
 
     // set window to full screen
@@ -122,8 +128,6 @@ public class GameActivity extends AppCompatActivity {
         int maxDelay=3000;
         int minDelay=1000;
         int delay=random.nextInt(maxDelay-minDelay)+minDelay;
-
-        Fruit ftemp=new Fruit(GameActivity.this, R.drawable.fruit_apple, 1,100);
         ftemp.setY(yPos);
         ftemp.setX(xPos);
 
