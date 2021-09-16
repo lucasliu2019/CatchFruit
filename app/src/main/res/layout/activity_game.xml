@@ -10,7 +10,18 @@
         android:id="@+id/content_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentTop="true"/>
+        android:layout_alignParentTop="true">
+
+        <ImageView
+            android:id="@+id/basket_empty"
+            android:layout_width="91dp"
+            android:layout_height="91dp"
+            android:layout_gravity="bottom"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="55dp"
+            app:srcCompat="@drawable/basket" />
+    </FrameLayout>
 
 
     <!-- Container for pin icons -->

@@ -1,5 +1,6 @@
 package com.android.catchfruit;
 
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -40,7 +41,6 @@ public class GameActivity extends AppCompatActivity {
     private int fruitCaught = 0;
 
     private ArrayList<ImageView> pinImages = new ArrayList<>();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,9 +67,11 @@ public class GameActivity extends AppCompatActivity {
         pinImages.add((ImageView)findViewById(R.id.pushpin3));
         pinImages.add((ImageView)findViewById(R.id.pushpin4));
         pinImages.add((ImageView)findViewById(R.id.pushpin5));
+        ImageView basket = (ImageView) findViewById(R.id.basket_empty);
 
         contentView = (ViewGroup) findViewById(R.id.content_view);
         contentView.setOnTouchListener(new View.OnTouchListener(){
+            @SuppressLint("ClickableViewAccessibility")
             @Override
             public boolean onTouch(View view, MotionEvent event) {
                 Log.d(TAG,"onTouch");
@@ -77,11 +79,23 @@ public class GameActivity extends AppCompatActivity {
                 launchFruit((int)(event.getX()),(int)(event.getY()));
                 // set up the basket here
                 if(event.getAction()==MotionEvent.ACTION_DOWN){
-
+                    basket.setOnTouchListener(onTouchListener());
                 }
                 return false;
             }
         });
+    }
+
+    //use to move the basket.... Not done yet
+    private View.OnTouchListener onTouchListener() {
+        View.OnTouchListener onTouchListener = new View.OnTouchListener() {
+            @SuppressLint("ClickableViewAccessibility")
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return false;
+            }
+        };
+        return onTouchListener;
     }
 
     // set window to full screen
