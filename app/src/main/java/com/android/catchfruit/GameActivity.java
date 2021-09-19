@@ -14,6 +14,8 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Random;
 
 public class GameActivity extends AppCompatActivity {
 
@@ -71,9 +73,11 @@ public class GameActivity extends AppCompatActivity {
             @Override
             public boolean onTouch(View view, MotionEvent event) {
                 Log.d(TAG,"onTouch");
+
+                launchFruit((int)(event.getX()),(int)(event.getY()));
                 // set up the basket here
                 if(event.getAction()==MotionEvent.ACTION_DOWN){
-                    launchFruit(scrWidth/2);
+
                 }
                 return false;
             }
@@ -94,21 +98,32 @@ public class GameActivity extends AppCompatActivity {
         contentView.removeView(fruit);
     }
 
-    public void launchFruit(int xPos)
+    public void launchFruit(int xPos, int yPos)
     {
-        Fruit ftemp=new Fruit(GameActivity.this, R.drawable.pin, 1);
-        ftemp.setY(scrHeight);
+        Random random=new Random(new Date().getTime());
+
+        //Overwrite
+        xPos=random.nextInt(scrWidth -200);
+
+        int maxDelay=3000;
+        int minDelay=1000;
+        int delay=random.nextInt(maxDelay-minDelay)+minDelay;
+
+        Fruit ftemp=new Fruit(GameActivity.this, R.drawable.fruit_apple, 1,100);
+        ftemp.setY(yPos);
         ftemp.setX(xPos);
 
         contentView.addView(ftemp);
-        ftemp.release(scrHeight,3000);
+        ftemp.release(scrHeight,delay);
 
-        Log.d(TAG, "Fruit created");
+        Log.d(TAG, "Fruit created @ x="+xPos+", y="+yPos);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+
+        Utilities.setToFullScreen(getWindow());
 
         ViewTreeObserver viewTreeObserver = contentView.getViewTreeObserver();
         if (viewTreeObserver.isAlive()) {
@@ -118,6 +133,7 @@ public class GameActivity extends AppCompatActivity {
                     contentView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
                     scrWidth = contentView.getWidth();
                     scrHeight = contentView.getHeight();
+                    Log.d(TAG,"scrHeight="+scrHeight+" scrWidth="+scrWidth);
                 }
             });
         }
